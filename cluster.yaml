@@ -1,7 +1,7 @@
 apiVersion: cluster.k8s.io/v1alpha1
 kind: Cluster
 metadata:
-  name: example
+  name: shark
 spec:
   clusterNetwork:
     services:
@@ -17,20 +17,19 @@ spec:
       user: root
       os:
         files:
-        - source:
-            configmap: repo
-            key: kubernetes.repo
-          destination: /etc/yum.repos.d/kubernetes.repo
-        - source:
-            configmap: repo
-            key: docker-ce.repo
-          destination: /etc/yum.repos.d/docker-ce.repo
-        - source:
-            configmap: docker
-            key: daemon.json
-          destination: /etc/docker/daemon.json
+          - source:
+              configmap: repo
+              key: kubernetes.repo
+            destination: /etc/yum.repos.d/kubernetes.repo
+          - source:
+              configmap: repo
+              key: docker-ce.repo
+            destination: /etc/yum.repos.d/docker-ce.repo
+          - source:
+              configmap: docker
+              key: daemon.json
+            destination: /etc/docker/daemon.json
       cri:
         kind: docker
         package: docker-ce
         version: 18.09.7
-
